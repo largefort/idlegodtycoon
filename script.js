@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function createHuman() {
+    function createHuman(showAlert = true) {
         const cost = 50; // Cost to create a human
         if (gameState.divinity >= cost) {
             gameState.divinity -= cost;
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
             gameState.faithPerSecond += gameState.faithPerHuman; // Increase faith generation with each human
             saveGameState();
             updateDisplay();
-        } else {
+        } else if (showAlert) {
             alert("Not enough divinity to create a human!");
         }
     }
@@ -102,7 +102,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function autoCreateHuman() {
         if (gameState.autoCreation) {
-            createHuman();
+            gameState.population++;
+            gameState.faithPerSecond += gameState.faithPerHuman; // Increase faith generation with each auto-created human
+            saveGameState();
+            updateDisplay();
         }
     }
 
@@ -126,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gatherDivinityButton.addEventListener("click", gatherDivinity);
     evolveHumanButton.addEventListener("click", evolveHuman);
-    createHumanButton.addEventListener("click", createHuman);
+    createHumanButton.addEventListener("click", () => createHuman(true));
     receiveDivineGiftButton.addEventListener("click", receiveDivineGift);
     buyAutoCreationButton.addEventListener("click", buyAutoCreation);
 
