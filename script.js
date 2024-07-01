@@ -136,5 +136,5 @@ document.addEventListener("DOMContentLoaded", () => {
     loadGameState();
     updateDisplay();
     setInterval(autoGatherDivinity, 1000);
-    setInterval(autoCreateHuman, gameState.autoCreationRate * 1000);
+    setInterval(autoCreateHuman, gameState.autoCreationRate * 10000);
 });
